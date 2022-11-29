@@ -1,0 +1,71 @@
+{
+  "name": "workerman/webman",
+  "type": "project",
+  "keywords": [
+    "high performance",
+    "http service"
+  ],
+  "homepage": "https://www.workerman.net",
+  "license": "MIT",
+  "description": "High performance HTTP Service Framework.",
+  "authors": [
+    {
+      "name": "walkor",
+      "email": "walkor@workerman.net",
+      "homepage": "https://www.workerman.net",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "walkor@workerman.net",
+    "issues": "https://github.com/walkor/webman/issues",
+    "forum": "https://wenda.workerman.net/",
+    "wiki": "https://workerman.net/doc/webman",
+    "source": "https://github.com/walkor/webman"
+  },
+  "require": {
+    "php": ">=7.2",
+    "workerman/webman-framework": "^1.4.3",
+    "monolog/monolog": "^2.0",
+    "psr/container": "^1.1.1",
+    "webman/think-orm": "^1.0",
+    "illuminate/redis": "^8.83",
+    "illuminate/events": "^8.83",
+    "topthink/think-validate": "^2.0",
+    "vlucas/phpdotenv": "^5.4",
+    "webman/console": "^1.2",
+    "php-di/php-di": "^6.4",
+    "doctrine/annotations": "^1.13",
+    "webman/event": "^1.0",
+    "tinywan/rpc": "^0.0.2",
+    "tinywan/limit-traffic": "^0.0.5",
+    "webman/redis-queue": "^1.2",
+    "tinywan/jwt": "^1.5"
+  },
+  "suggest": {
+    "ext-event": "For better performance. "
+  },
+  "autoload": {
+    "psr-4": {
+      "": "./",
+      "App\\": "./app"
+    },
+    "files": [
+      "./support/helpers.php"
+    ]
+  },
+  "scripts": {
+    "post-package-install": [
+      "support\\Plugin::install"
+    ],
+    "post-package-update": [
+      "support\\Plugin::install"
+    ],
+    "pre-package-uninstall": [
+      "support\\Plugin::uninstall"
+    ]
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  }
+}
