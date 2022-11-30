@@ -1,3 +1,9 @@
+1. 执行`php start.php start`启动
+2. 访问`http://localhost:2346/index/json`
+
+创建模型：`php webman make:model 表名`
+
+
 ### 单元测试-PHPUnit
 
 在`./test`中编写单元测试
@@ -102,5 +108,21 @@ Client::send($queue, $data);
 Client::send($queue, $data, 60);
 ```
 
+### 数据库迁移
 
+```shell
+# 初始化
+vendor/bin/phinx init
+# 创建
+vendor/bin/phinx create TestTable
+# 执行
+vendor/bin/phinx migrate -e development
+# 回滚
+vendor/bin/phinx rollback -e development -t 20120103083322
+# 创建seeder
+vendor/bin/phinx seed:create MySeeder
+# 执行某一seeder
+vendor/bin/phinx seed:run -e development -s MySeeder
+```
+[文档](https://tsy12321.gitbooks.io/phinx-doc/content/)
 

@@ -17,5 +17,6 @@ return [
     '' => [
         // 接口访问限流中间件
         Tinywan\LimitTraffic\Middleware\LimitTrafficMiddleware::class,
+        app\middleware\RuleCheck::class,
     ]
 ];
