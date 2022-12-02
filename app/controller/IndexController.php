@@ -3,6 +3,7 @@ declare (strict_types=1);
 
 namespace app\controller;
 
+use support\exception\SupportException;
 use support\Request;
 use support\Response;
 
@@ -21,5 +22,10 @@ class IndexController
     public function json(Request $request): Response
     {
         return json(['code' => 0, 'msg' => 'ok']);
+    }
+
+    public function exception(Request $request): Response
+    {
+        throw new SupportException('测试异常状态', 505);
     }
 }
