@@ -14,12 +14,12 @@ use teamones\casbin\Enforcer;
  */
 class RuleCheck implements MiddlewareInterface
 {
-    public function process(Request $request, callable $next): Response
+    public function process(Request $request, callable $handler): Response
     {
-        if (Enforcer::enforce('user1', '/user', 'read')) {
-            return $next($request);
-        } else {
-            return json(['code' => 0, 'msg' => 'no auth']);
-        }
+//        if (!Enforcer::enforce('user1', '/user', 'read')) {
+//            return json(['code' => 0, 'msg' => 'no auth']);
+//        }
+
+        return $handler($request);
     }
 }
