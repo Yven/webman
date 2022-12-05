@@ -1,4 +1,11 @@
 <?php
+/**
+ * @Author   : Yven<yvenchang@163.com>
+ * @Copyright: Yven<yvenchang@163.com>
+ * @Link     : https://www.yvenchang.com
+ * @Created  : 2022/12/5 15:33
+ */
+
 declare (strict_types=1);
 
 namespace app\middleware;
@@ -9,8 +16,11 @@ use Webman\Http\Request;
 use teamones\casbin\Enforcer;
 
 /**
- * Class StaticFile
- * @package app\middleware
+ * @Description
+ * 权限规则判断中间件
+ *
+ * @Class  : RuleCheck
+ * @Package: app\middleware
  */
 class RuleCheck implements MiddlewareInterface
 {

@@ -1,16 +1,12 @@
 <?php
 /**
- * This file is part of webman.
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the MIT-LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @author    walkor<walkor@workerman.net>
- * @copyright walkor<walkor@workerman.net>
- * @link      http://www.workerman.net/
- * @license   http://www.opensource.org/licenses/mit-license.php MIT License
+ * @Author   : Yven<yvenchang@163.com>
+ * @Copyright: Yven<yvenchang@163.com>
+ * @Link     : https://www.yvenchang.com
+ * @Created  : 2022/12/5 15:33
  */
+
+declare (strict_types=1);
 
 namespace support\exception;
 
@@ -19,8 +15,12 @@ use Webman\Http\Response;
 use Webman\Http\Request;
 
 /**
- * Class BusinessException
- * @package support\exception
+ * @Description
+ * 业务异常类
+ * 核心业务异常抛出此异常类
+ *
+ * @Class  : BusinessException
+ * @Package: support\exception
  */
 class BusinessException extends Exception
 {
