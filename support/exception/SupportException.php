@@ -10,6 +10,8 @@ declare (strict_types=1);
 
 namespace support\exception;
 
+use support\StatusCode;
+
 /**
  * @Description
  * 第三方业务异常类
@@ -18,6 +20,19 @@ namespace support\exception;
  * @Class  : SupportException
  * @Package: support\exception
  */
-class SupportException extends \Exception
+class SupportException extends BaseException
 {
+    public function __construct($message = "", $code = 0, \Throwable $previous = null)
+    {
+        $this->message = $this->formatMessage($message, $code);
+
+        parent::__construct($this->message, 0, $previous);
+
+        $this->code = $code ?: StatusCode::SERR_SERVICE_EXCEPTION;
+    }
+
+    protected function formatMessage($message, $code): string
+    {
+        return __CLASS__.": [".$code."] ".$message;
+    }
 }

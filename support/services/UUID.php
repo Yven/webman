@@ -55,7 +55,7 @@ class UUID
                 ->setSequenceResolver(new RedisSequenceResolver(Redis::instance()))
                 ->id();
         } catch (\Exception $e) {
-            throw new SupportException($e->getMessage(), $e->getCode());
+            throw new SupportException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

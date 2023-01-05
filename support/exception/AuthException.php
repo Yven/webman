@@ -6,18 +6,18 @@
  * @Created  : 2022/12/5 15:33
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace support\exception;
 
 /**
  * @Description
- * 业务异常类
- * 核心业务异常抛出此异常类
+ * 认证异常类
+ * 用户身份和权限认证异常抛出类
  *
- * @Class  : BusinessException
+ * @Class  : AuthException
  * @Package: support\exception
  */
-class BusinessException extends BaseException
+class AuthException extends BaseException
 {
 }

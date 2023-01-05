@@ -10,11 +10,8 @@ declare (strict_types=1);
 
 namespace support;
 
-use support\exception\BusinessException;
 use Throwable;
 use Webman\Exception\ExceptionHandler;
-use Webman\Http\Request;
-use Webman\Http\Response;
 
 /**
  * @Description
@@ -30,7 +27,7 @@ class Handler extends ExceptionHandler
      * @Var string[] $dontReport
      */
     public $dontReport = [
-        BusinessException::class,
+        \support\exception\BusinessException::class,
     ];
 
     /**
@@ -42,7 +39,16 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $exception)
     {
-        parent::report($exception);
+        if ($this->shouldntReport($exception)) {
+            return;
+        }
+
+        $logs = '';
+        if ($request = \request()) {
+            $logs = $request->getRealIp() . ' ' . $request->method() . ' ' . \trim($request->fullUrl(), '/');
+        }
+
+        $this->_logger->error($logs . PHP_EOL . $exception);
     }
 
     /**
@@ -53,14 +59,24 @@ class Handler extends ExceptionHandler
      *
      * @return Response
      */
-    public function render(Request $request, Throwable $exception): Response
+    public function render(\Webman\Http\Request $request, Throwable $exception): \Webman\Http\Response
     {
-        if(($exception instanceof BusinessException) && ($response = $exception->render($request)))
-        {
+        // debug模式输出，线上模式输出
+        // 系统Exception处理，系统Error处理，自定义Exception处理
+
+        if(!$this->_debug) {
+            if (($exception instanceof \support\exception\BaseException)) {
+                $response = $exception->render($request);
+            } elseif (($exception instanceof \Error)) {
+                $response = \support\Response::failed(StatusCode::SERR_DEFAULT, ['msg' => $exception->getMessage()]);
+            } else {
+                $response = \support\Response::failed(StatusCode::SERR_SERVICE_EXCEPTION, ['msg' => $exception->getMessage()]);
+            }
+
             return $response;
         }
 
-        return parent::render($request, $exception);
+        return new Response(500, [], \nl2br((string)$exception));
     }
 
 }
