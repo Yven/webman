@@ -6,6 +6,7 @@ namespace app\controller;
 use support\exception\SupportException;
 use support\Request;
 use support\Response;
+use support\StatusCode;
 
 class IndexController
 {
@@ -26,6 +27,6 @@ class IndexController
 
     public function exception(Request $request): Response
     {
-        throw new SupportException('测试异常状态', 505);
+        throw new SupportException('测试异常状态', StatusCode::SERR_SERVICE_EXCEPTION);
     }
 }

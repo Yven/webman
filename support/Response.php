@@ -75,7 +75,7 @@ class Response extends \Webman\Http\Response
     {
         return new Response(
             200,
-            $headers,
+            array_merge($headers, ['Content-Type' => 'application/json']),
             \json_encode(
                 [
                     'status' => $code,
